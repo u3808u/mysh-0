@@ -9,8 +9,8 @@ static void release_argv(int argc, char*** argv);
 
 int main()
 {
-  char buf[8096];
-  int argc;
+  char buf[8096]="";
+  int argc = 0;
   char** argv;
 
   while (1) {
@@ -38,16 +38,13 @@ release_and_continue:
     continue;
 release_and_exit:
     release_argv(argc, &argv);
-    break;
+    return 0;
   }
 
   return 0;
 }
 
 static void release_argv(int argc, char*** argv) {
-  for (int i = 0; i < argc; ++i) {
-    free((*argv)[i]);
-  }
   free(*argv);
   *argv = NULL;
 }
